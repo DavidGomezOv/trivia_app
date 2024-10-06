@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia_app/pages/error_page.dart';
-import 'package:trivia_app/pages/menu/menu_page.dart';
+import 'package:trivia_app/presentation/pages/error_page.dart';
+import 'package:trivia_app/presentation/pages/menu/menu_page.dart';
 import 'package:trivia_app/routes/route_data.dart';
 
 class AppRouter {
