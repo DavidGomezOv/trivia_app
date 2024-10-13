@@ -14,6 +14,9 @@ class ButtonStyles {
           if (states.contains(WidgetState.hovered)) {
             return CustomColors.primaryHovered;
           }
+          if (states.contains(WidgetState.disabled)) {
+            return CustomColors.tertiary;
+          }
           return Theme.of(context).primaryColor;
         },
       ),

@@ -10,6 +10,8 @@ class AppBackgroundWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
+      height: double.infinity,
       color: Theme.of(context).colorScheme.surface,
       child: Stack(
         children: [
