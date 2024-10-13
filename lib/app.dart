@@ -50,6 +50,12 @@ class App extends StatelessWidget {
                   fontVariations: [const FontVariation('wght', 700)],
                   fontSize: 24,
                 ),
+            titleMedium: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontFamily: 'Rubik',
+                  color: Colors.white,
+                  fontVariations: [const FontVariation('wght', 700)],
+                  fontSize: 18,
+                ),
           ),
         ),
       ),

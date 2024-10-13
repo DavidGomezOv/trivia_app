@@ -9,5 +9,6 @@ class CustomColors {
   static Color surface = const Color(0xff1c0444);
   static Color surfaceSecondary = const Color(0xff2b0d5d);
   static Color greenText = const Color(0xff12fa9b);
+  static Color greenButton = const Color(0xff12fadf);
 
 }

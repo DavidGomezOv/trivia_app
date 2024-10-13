@@ -18,15 +18,27 @@ class ButtonStyles {
         },
       ),
       elevation: WidgetStateProperty.all(6),
-      foregroundColor: WidgetStateProperty.resolveWith(
+      padding: WidgetStateProperty.all(const EdgeInsets.all(20)),
+    );
+  }
+
+  static ButtonStyle categoryButton(BuildContext context) {
+    return ButtonStyle(
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      backgroundColor: WidgetStateProperty.resolveWith(
         (states) {
-          if (states.contains(WidgetState.disabled)) {
-            return Theme.of(context).colorScheme.secondary;
+          if (states.contains(WidgetState.hovered)) {
+            return CustomColors.primaryHovered;
           }
-          return Theme.of(context).primaryColor;
+          return CustomColors.greenButton;
         },
       ),
-      padding: WidgetStateProperty.all(const EdgeInsets.all(20)),
+      elevation: WidgetStateProperty.all(6),
+      padding: WidgetStateProperty.all(EdgeInsets.zero),
     );
   }
 }
