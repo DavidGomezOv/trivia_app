@@ -24,24 +24,4 @@ class ButtonStyles {
       padding: WidgetStateProperty.all(const EdgeInsets.all(20)),
     );
   }
-
-  static ButtonStyle categoryButton(BuildContext context) {
-    return ButtonStyle(
-      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      backgroundColor: WidgetStateProperty.resolveWith(
-        (states) {
-          if (states.contains(WidgetState.hovered)) {
-            return CustomColors.primaryHovered;
-          }
-          return CustomColors.greenButton;
-        },
-      ),
-      elevation: WidgetStateProperty.all(6),
-      padding: WidgetStateProperty.all(EdgeInsets.zero),
-    );
-  }
 }

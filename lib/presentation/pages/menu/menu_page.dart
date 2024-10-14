@@ -92,7 +92,7 @@ class MenuPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
-                const Spacer()
+                const Spacer(),
               ],
             ),
           ],

@@ -117,7 +117,7 @@ class AppBackgroundWidget extends StatelessWidget {
               ),
             ),
           ),
-          child
+          child,
         ],
       ),
     );
