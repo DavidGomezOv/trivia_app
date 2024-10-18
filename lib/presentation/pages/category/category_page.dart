@@ -44,8 +44,8 @@ class CategoryPage extends StatelessWidget {
                         6,
                         (index) => CategoryButton(
                           category: state.categories[index],
-                          hovered: state.categories[index] == state.hoveredCategory,
-                          selected: state.categories[index] == state.selectedCategory,
+                          isHovered: state.categories[index] == state.hoveredCategory,
+                          isSelected: state.categories[index] == state.selectedCategory,
                         ),
                       ),
                     ],
@@ -53,7 +53,9 @@ class CategoryPage extends StatelessWidget {
                 ),
                 SizedBox(height: context.isMobile() ? 20 : 40),
                 Text(
-                  state.selectedCategory?.title ?? 'Select Category',
+                  state.selectedCategory?.title ??
+                      state.hoveredCategory?.title ??
+                      'Select Category',
                   style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color:
                             state.selectedCategory == null ? Colors.white : CustomColors.greenText,
@@ -72,7 +74,10 @@ class CategoryPage extends StatelessWidget {
                 if (state.selectedCategory != null)
                   ElevatedButton(
                     style: ButtonStyles.primaryButton(context),
-                    onPressed: () => context.goNamed(AppRouter.difficultyRouteData.name),
+                    onPressed: () => context.goNamed(
+                      AppRouter.difficultyRouteData.name,
+                      queryParameters: {'category': state.selectedCategory!.title},
+                    ),
                     child: Text(
                       'Select',
                       style: Theme.of(context).textTheme.headlineSmall,

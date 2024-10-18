@@ -22,14 +22,14 @@ class CategoryCubit extends Cubit<CategoryState> {
                   bottom: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.sports_soccer_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
                   bottom: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.sports_soccer_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -44,7 +44,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.color_lens_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -52,7 +52,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.color_lens_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -67,7 +67,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.pets, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -75,7 +75,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.pets, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -89,14 +89,14 @@ class CategoryCubit extends Cubit<CategoryState> {
                   top: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.history_edu_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
                   top: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.history_edu_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -111,7 +111,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.map_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -119,7 +119,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.map_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -134,7 +134,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 60, color: Colors.white),
+                    child: Icon(Icons.sports_kabaddi_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -142,7 +142,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_esports_rounded, size: 80, color: Colors.white),
+                    child: Icon(Icons.sports_kabaddi_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),

@@ -10,13 +10,13 @@ class CategoryButton extends StatelessWidget {
   const CategoryButton({
     super.key,
     required this.category,
-    required this.hovered,
-    required this.selected,
+    required this.isHovered,
+    required this.isSelected,
   });
 
   final CategoryUiModel category;
-  final bool hovered;
-  final bool selected;
+  final bool isHovered;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CategoryButton extends StatelessWidget {
       height: context.isMobile() ? 320 : 450,
       child: AnimatedScale(
         duration: const Duration(milliseconds: 150),
-        scale: hovered || selected ? 1.12 : 1,
+        scale: isHovered || isSelected ? 1.12 : 1,
         child: ClipPath(
           clipper: _ButtonClipper(angle: category.angle),
           child: Stack(
