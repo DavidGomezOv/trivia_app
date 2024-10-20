@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
@@ -33,7 +34,7 @@ class GamePage extends StatelessWidget {
       child: BlocConsumer<GameCubit, GameState>(
         listenWhen: (previous, current) => previous.pageStatus != current.pageStatus,
         listener: (context, state) {
-          if (state.pageStatus == PageState.failedToLoad) {
+          if (state.pageStatus == PageStatus.failedToLoad) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
@@ -50,10 +51,7 @@ class GamePage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state.pageStatus == PageState.loading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state.pageStatus == PageState.failedToLoad) {
+          if (state.pageStatus == PageStatus.failedToLoad) {
             return Center(
               child: Text(
                 state.errorMessage ?? 'An error occurred, please try again.',
@@ -62,7 +60,7 @@ class GamePage extends StatelessWidget {
               ),
             );
           }
-          if (state.pageStatus == PageState.loaded && state.questions.isNotEmpty) {
+          if (state.pageStatus == PageStatus.loaded && state.questions.isNotEmpty) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -98,8 +96,7 @@ class GamePage extends StatelessWidget {
               ],
             );
           }
-
-          return const SizedBox.shrink();
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

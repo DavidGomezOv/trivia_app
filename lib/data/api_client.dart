@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:trivia_app/core/exceptions.dart';
-import 'package:trivia_app/data/base_api_client.dart';
-import 'package:trivia_app/data/base_json_parser.dart';
+import 'package:trivia_app/data/base/base_api_client.dart';
+import 'package:trivia_app/data/base/base_json_parser.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClient implements BaseApiClient {

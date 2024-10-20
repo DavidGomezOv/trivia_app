@@ -1,4 +1,4 @@
-import 'package:trivia_app/data/base_json_parser.dart';
+import 'package:trivia_app/data/base/base_json_parser.dart';
 
 abstract class BaseApiClient {
   Future<T> invokeGet<T>({

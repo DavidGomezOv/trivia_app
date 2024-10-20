@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:trivia_app/core/enums.dart';
+import 'package:trivia_app/domain/irepositories/i_game_repository.dart';
 import 'package:trivia_app/domain/models/difficulty_ui_model.dart';
+import 'package:collection/collection.dart';
 
 part 'difficulty_state.dart';
 
 part 'difficulty_cubit.freezed.dart';
 
 class DifficultyCubit extends Cubit<DifficultyState> {
-  DifficultyCubit()
+  DifficultyCubit({required this.questionsRepository})
       : super(
           DifficultyState(
             difficulties: [
@@ -39,6 +42,47 @@ class DifficultyCubit extends Cubit<DifficultyState> {
             ],
           ),
         );
+
+  final IGameRepository questionsRepository;
+
+  Future<void> getQuestionCountPerDifficulty({required String categoryId}) async {
+    emit(state.copyWith(pageStatus: PageStatus.loading));
+
+    final result = await questionsRepository.getQuestionCountPerDifficulty(categoryId: categoryId);
+
+    result.when(
+      success: (data) {
+        final List<int> questionsPerCategory = [
+          data.easyQuestions,
+          data.mediumQuestions,
+          data.hardQuestions,
+        ];
+        final List<DifficultyUiModel> verifiedDifficulties = [];
+
+        state.difficulties.forEachIndexed((index, element) {
+          if (questionsPerCategory[index] >= element.questionsQuantity) {
+            verifiedDifficulties.add(element);
+          }
+        });
+
+        if (verifiedDifficulties.isEmpty) {
+          emit(
+            state.copyWith(
+              pageStatus: PageStatus.failedToLoad,
+              errorMessage:
+                  'No questions available for the selected Category, please choose another one.',
+            ),
+          );
+          return;
+        }
+
+        emit(state.copyWith(difficulties: verifiedDifficulties, pageStatus: PageStatus.loaded));
+      },
+      failure: (error) {
+        emit(state.copyWith(pageStatus: PageStatus.failedToLoad, errorMessage: error.toString()));
+      },
+    );
+  }
 
   void updateSelectedDifficulty({required DifficultyUiModel selectedDifficulty}) {
     emit(state.copyWith(selectedDifficulty: selectedDifficulty));

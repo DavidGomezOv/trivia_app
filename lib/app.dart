@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:trivia_app/data/api/questions_api.dart';
+import 'package:trivia_app/data/api/game_api.dart';
 import 'package:trivia_app/data/api_client.dart';
-import 'package:trivia_app/data/repositories/questions_repository.dart';
-import 'package:trivia_app/domain/irepositories/i_questions_repository.dart';
+import 'package:trivia_app/data/repositories/game_repository.dart';
+import 'package:trivia_app/domain/irepositories/i_game_repository.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,15 +13,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<IQuestionsRepository>(
-      create: (context) => QuestionsRepository(
-        questionsApi: QuestionsApi(
+    return RepositoryProvider<IGameRepository>(
+      create: (context) => GameRepository(
+        questionsApi: GameApi(
           ApiClient(),
         ),
       ),
       child: BlocProvider<GameCubit>(
         create: (context) => GameCubit(
-          questionsRepository: context.read<IQuestionsRepository>(),
+          questionsRepository: context.read<IGameRepository>(),
         ),
         child: MaterialApp.router(
           routerConfig: AppRouter.generateAppRouter(context),
@@ -58,7 +58,7 @@ class App extends StatelessWidget {
               titleSmall: Theme.of(context).textTheme.titleSmall!.copyWith(
                     fontFamily: 'Rubik',
                     color: Colors.white,
-                    fontVariations: [const FontVariation('wght', 400)],
+                    fontVariations: [const FontVariation('wght', 500)],
                     fontSize: 18,
                   ),
               bodyMedium: Theme.of(context).textTheme.bodyMedium!.copyWith(
