@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DifficultyUiModel {
   final String title;
   final String description;
-  final int questionQuantity;
+  final int questionsQuantity;
   final int timePerQuestion;
   final Color backgroundColor;
   final int starts;
@@ -11,7 +11,7 @@ class DifficultyUiModel {
   DifficultyUiModel({
     required this.title,
     required this.description,
-    required this.questionQuantity,
+    required this.questionsQuantity,
     required this.timePerQuestion,
     required this.backgroundColor,
     required this.starts,

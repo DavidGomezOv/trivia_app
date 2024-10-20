@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:trivia_app/presentation/widgets/app_background_widget.dart';
 
 class BaseScaffold extends StatelessWidget {
-  const BaseScaffold({super.key, required this.child, required this.backButton});
+  const BaseScaffold({
+    super.key,
+    required this.child,
+    required this.backButton,
+    this.width,
+  });
 
   final Widget child;
   final Widget backButton;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +26,16 @@ class BaseScaffold extends StatelessWidget {
               children: [
                 Align(alignment: Alignment.topLeft, child: backButton),
                 Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverFillRemaining(
-                        hasScrollBody: false,
-                        child: child,
-                      ),
-                    ],
+                  child: SizedBox(
+                    width: width,
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: child,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

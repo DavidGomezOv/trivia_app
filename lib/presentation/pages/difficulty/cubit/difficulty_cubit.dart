@@ -15,7 +15,7 @@ class DifficultyCubit extends Cubit<DifficultyState> {
               DifficultyUiModel(
                 title: 'Easy',
                 description: 'You will have 20 seconds per question and a total of 10 questions.',
-                questionQuantity: 10,
+                questionsQuantity: 10,
                 timePerQuestion: 20,
                 backgroundColor: Colors.green,
                 starts: 1,
@@ -23,7 +23,7 @@ class DifficultyCubit extends Cubit<DifficultyState> {
               DifficultyUiModel(
                 title: 'Medium',
                 description: 'You will have 15 seconds per question and a total of 15 questions.',
-                questionQuantity: 15,
+                questionsQuantity: 15,
                 timePerQuestion: 15,
                 backgroundColor: Colors.orange,
                 starts: 2,
@@ -31,7 +31,7 @@ class DifficultyCubit extends Cubit<DifficultyState> {
               DifficultyUiModel(
                 title: 'Hard',
                 description: 'You will have 10 seconds per question and a total of 20 questions.',
-                questionQuantity: 20,
+                questionsQuantity: 20,
                 timePerQuestion: 10,
                 backgroundColor: Colors.red,
                 starts: 3,

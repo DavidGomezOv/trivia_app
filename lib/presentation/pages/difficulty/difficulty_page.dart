@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia_app/extensions.dart';
+import 'package:trivia_app/domain/models/game_config.dart';
+import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/difficulty/cubit/difficulty_cubit.dart';
 import 'package:trivia_app/presentation/pages/difficulty/widgets/difficulty_button_widget.dart';
+import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
 import 'package:trivia_app/routes/app_router.dart';
 import 'package:trivia_app/theme/button_styles.dart';
@@ -14,7 +16,7 @@ class DifficultyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<DifficultyCubit>(
       create: (context) => DifficultyCubit(),
       child: BaseScaffold(
         backButton: Container(
@@ -77,13 +79,20 @@ class DifficultyPage extends StatelessWidget {
                     if (state.selectedDifficulty != null)
                       ElevatedButton(
                         style: ButtonStyles.primaryButton(context),
-                        onPressed: () => context.goNamed(
-                          AppRouter.gameRouteData.name,
-                          queryParameters: {
-                            ...GoRouterState.of(context).uri.queryParameters,
-                            'difficulty': state.selectedDifficulty!.title,
-                          },
-                        ),
+                        onPressed: () {
+                          final gameConfig = GameConfig(
+                            amount: state.selectedDifficulty!.questionsQuantity.toString(),
+                            category: GoRouterState.of(context)
+                                .uri
+                                .queryParameters['category']!
+                                .categoryId(),
+                            difficulty: state.selectedDifficulty!.title.toLowerCase(),
+                          );
+                          context.read<GameCubit>()
+                            ..resetGame()
+                            ..getQuestions(gameConfig: gameConfig);
+                          context.goNamed(AppRouter.gameRouteData.name);
+                        },
                         child: Text(
                           'Start Game',
                           style: Theme.of(context).textTheme.headlineSmall,

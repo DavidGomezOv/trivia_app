@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trivia_app/extensions.dart';
+import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/category/cubit/category_cubit.dart';
 import 'package:trivia_app/presentation/pages/category/widgets/category_button_widget.dart';
 import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
@@ -14,7 +14,7 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<CategoryCubit>(
       create: (context) => CategoryCubit(),
       child: BaseScaffold(
         backButton: Container(

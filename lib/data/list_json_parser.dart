@@ -9,7 +9,7 @@ class ListJsonParser<T> extends BaseJsonParser<List<T>> {
 
   @override
   List<T> parseFromJson(String json) {
-    final decodedJson = jsonDecode(json) as List<dynamic>;
+    final decodedJson = jsonDecode(json)['results'] as List<dynamic>;
     return decodedJson
         .map(
           (element) => fromJson(element as Map<String, dynamic>),

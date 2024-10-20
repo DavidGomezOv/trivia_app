@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trivia_app/domain/models/difficulty_ui_model.dart';
-import 'package:trivia_app/extensions.dart';
+import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/difficulty/cubit/difficulty_cubit.dart';
 
 class DifficultyButtonWidget extends StatefulWidget {
