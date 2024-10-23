@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/domain/irepositories/i_game_repository.dart';
+import 'package:trivia_app/domain/models/difficulty_ui_model.dart';
 import 'package:trivia_app/domain/models/game_config.dart';
 import 'package:trivia_app/domain/models/question.dart';
 
@@ -11,14 +12,14 @@ part 'game_state.dart';
 
 part 'game_cubit.freezed.dart';
 
-enum GameStatus { initial, inProgress, finished }
+enum GameStatus { initial, inProgress, finished, questionTimeOff }
 
 class GameCubit extends Cubit<GameState> {
   GameCubit({required this.questionsRepository}) : super(const GameState());
 
   final IGameRepository questionsRepository;
 
-  void resetGame(){
+  void resetGame() {
     emit(const GameState());
   }
 
@@ -51,6 +52,12 @@ class GameCubit extends Cubit<GameState> {
   }
 
   void nextQuestion() {
-    emit(state.copyWith(currentQuestion: state.currentQuestion + 1));
+    if (state.currentQuestion + 1 < state.questions.length) {
+      emit(state.copyWith(currentQuestion: state.currentQuestion + 1));
+    }
+  }
+
+  void updateSelectedDifficulty({required DifficultyUiModel difficultyUiModel}) {
+    emit(state.copyWith(selectedDifficulty: difficultyUiModel));
   }
 }

@@ -80,7 +80,7 @@ class MenuPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Play now and level up',
+                  'Test your knowledge',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const Spacer(),

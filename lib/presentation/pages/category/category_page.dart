@@ -17,17 +17,7 @@ class CategoryPage extends StatelessWidget {
     return BlocProvider<CategoryCubit>(
       create: (context) => CategoryCubit(),
       child: BaseScaffold(
-        backButton: Container(
-          width: 60,
-          height: 60,
-          margin: EdgeInsets.only(top: 20, left: 10, bottom: context.isMobile() ? 30 : 0),
-          child: ElevatedButton(
-            style: ButtonStyles.primaryButton(context)
-                .copyWith(padding: const WidgetStatePropertyAll(EdgeInsets.zero)),
-            onPressed: () => context.goNamed(AppRouter.menuRouteData.name),
-            child: const Icon(Icons.home_rounded, color: Colors.white, size: 40),
-          ),
-        ),
+        onBackPressed: () => context.goNamed(AppRouter.menuRouteData.name),
         child: BlocBuilder<CategoryCubit, CategoryState>(
           buildWhen: (previous, current) =>
               previous.hoveredCategory != current.hoveredCategory ||
