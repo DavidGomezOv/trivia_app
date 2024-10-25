@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/theme/custom_colors.dart';
 
-class TimeIndicatorWidget extends StatefulWidget {
-  const TimeIndicatorWidget({
+class TimeLeftIndicatorWidget extends StatefulWidget {
+  const TimeLeftIndicatorWidget({
     super.key,
     required this.maxTime,
     required this.timeOff,
@@ -17,10 +17,10 @@ class TimeIndicatorWidget extends StatefulWidget {
   final Function() timeOff;
 
   @override
-  State<TimeIndicatorWidget> createState() => _TimeIndicatorWidgetState();
+  State<TimeLeftIndicatorWidget> createState() => _TimeLeftIndicatorWidgetState();
 }
 
-class _TimeIndicatorWidgetState extends State<TimeIndicatorWidget> with TickerProviderStateMixin {
+class _TimeLeftIndicatorWidgetState extends State<TimeLeftIndicatorWidget> with TickerProviderStateMixin {
   final duration = {
     20: 2500,
     15: 2000,

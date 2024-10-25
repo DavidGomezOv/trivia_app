@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -30,19 +31,26 @@ class GameCubit extends Cubit<GameState> {
 
     result.when(
       success: (data) {
-        final decodedData = data
-            .map(
-              (question) => Question(
-                question: utf8.decode(base64.decode(question.question)),
-                correctAnswer: utf8.decode(base64.decode(question.correctAnswer)),
-                incorrectAnswers: question.incorrectAnswers
-                    .map(
-                      (answer) => utf8.decode(base64.decode(answer)),
-                    )
-                    .toList(),
-              ),
-            )
-            .toList();
+        final decodedData = data.map(
+          (question) {
+            final decodedQuestion = Question(
+              question: utf8.decode(base64.decode(question.question)),
+              correctAnswer: utf8.decode(base64.decode(question.correctAnswer)),
+              incorrectAnswers: question.incorrectAnswers
+                  .map(
+                    (answer) => utf8.decode(base64.decode(answer)),
+                  )
+                  .toList(),
+            );
+            final randomPositions = List<int>.generate(4, (i) => i)
+              ..shuffle()
+              ..shuffle();
+            final index = Random().nextInt(randomPositions.length);
+            List<String> displayAnswers = List.from(decodedQuestion.incorrectAnswers)
+              ..insert(randomPositions[index], decodedQuestion.correctAnswer);
+            return decodedQuestion.copyWith(displayAnswers: displayAnswers);
+          },
+        ).toList();
         emit(state.copyWith(questions: decodedData, pageStatus: PageStatus.loaded));
       },
       failure: (error) {

@@ -8,6 +8,7 @@ class Question with _$Question {
     @Default('') String question,
     @Default('') String correctAnswer,
     @Default([]) List<String> incorrectAnswers,
+    @Default([]) List<String> displayAnswers,
   }) = _Question;
 
   factory Question.fromJsonModel(Map<String, dynamic> json) => Question(

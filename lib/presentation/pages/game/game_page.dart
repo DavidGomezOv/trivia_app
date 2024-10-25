@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
-import 'package:trivia_app/presentation/pages/game/widgets/time_indicator_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/answers_list_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/game_timer_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/time_left_indicator_widget.dart';
 import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
 import 'package:trivia_app/presentation/widgets/error_state_widget.dart';
-import 'package:trivia_app/theme/button_styles.dart';
 import 'package:trivia_app/theme/custom_colors.dart';
 
 class GamePage extends StatelessWidget {
@@ -17,6 +18,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final category = GoRouterState.of(context).uri.queryParameters['category']!;
     final gameCubit = context.read<GameCubit>();
+
     return BlocConsumer<GameCubit, GameState>(
       listenWhen: (previous, current) => previous.pageStatus != current.pageStatus,
       listener: (context, state) {
@@ -39,24 +41,33 @@ class GamePage extends StatelessWidget {
       builder: (context, state) {
         return BaseScaffold(
           width: context.isMobile() ? null : MediaQuery.sizeOf(context).width * 0.8,
-          header: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          header: Stack(
+            alignment: Alignment.center,
             children: [
-              Center(
-                child: Text(
-                  category,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displaySmall!
-                      .copyWith(color: CustomColors.greenText),
-                ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: GameTimerWidget(),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: Text(
-                  '${state.currentQuestion + 1} / ${state.questions.length}',
-                  style: Theme.of(context).textTheme.titleSmall!,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      category,
+                      style: Theme.of(context)
+                          .textTheme
+                          .displaySmall!
+                          .copyWith(color: CustomColors.greenText),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Text(
+                      '${state.currentQuestion + 1} / ${state.questions.length}',
+                      style: Theme.of(context).textTheme.titleSmall!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -73,7 +84,7 @@ class GamePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     if (!context.isMobile()) const SizedBox(height: 20),
-                    TimeIndicatorWidget(
+                    TimeLeftIndicatorWidget(
                       maxTime: state.selectedDifficulty!.timePerQuestion,
                       timeOff: () {
                         gameCubit.nextQuestion();
@@ -86,43 +97,28 @@ class GamePage extends StatelessWidget {
                         text: '${state.currentQuestion + 1}. ',
                         style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                               color: CustomColors.greenText,
-                              fontSize: 22,
+                              fontSize: 21,
                             ),
                         children: [
                           TextSpan(
                             text: currentQuestionData.question,
                             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                               fontVariations: [const FontVariation('wght', 500)],
-                              fontSize: 22,
+                              fontSize: 21,
                             ),
                           ),
                         ],
                       ),
                     ),
                     Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: currentQuestionData.incorrectAnswers
-                            .map(
-                              (element) => ElevatedButton(
-                                style: ButtonStyles.primaryButton(context),
-                                onPressed: () => gameCubit.nextQuestion(),
-                                child: Text(
-                                  element,
-                                  style: Theme.of(context).textTheme.headlineSmall,
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ButtonStyles.primaryButton(context),
-                      onPressed: () => gameCubit.nextQuestion(),
-                      child: Text(
-                        'Next Question',
-                        style: Theme.of(context).textTheme.headlineSmall,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: AnswersListWidget(
+                          answers: currentQuestionData.displayAnswers,
+                          onPressed: (selectedAnswer) {
+                            gameCubit.nextQuestion();
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
