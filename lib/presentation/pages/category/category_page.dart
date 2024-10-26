@@ -41,7 +41,7 @@ class CategoryPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: context.isMobile() ? 20 : 40),
+                SizedBox(height: context.isMobile() ? 20 : 30),
                 Text(
                   state.selectedCategory?.title ??
                       state.hoveredCategory?.title ??
@@ -60,7 +60,7 @@ class CategoryPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: context.isMobile() ? 10 : 30),
+                SizedBox(height: context.isMobile() ? 10 : 20),
                 if (state.selectedCategory != null)
                   ElevatedButton(
                     style: ButtonStyles.primaryButton(context),

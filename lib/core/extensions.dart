@@ -9,16 +9,16 @@ extension Category on String {
     switch (toLowerCase()) {
       case 'sports':
         return '21';
-      case 'art':
-        return '25';
-      case 'animals':
-        return '27';
+      case 'movies':
+        return '11';
+      case 'science':
+        return '17';
       case 'history':
         return '23';
       case 'geography':
         return '22';
-      case 'mythology':
-        return '20';
+      case 'computers':
+        return '18';
       default:
         return '0';
     }

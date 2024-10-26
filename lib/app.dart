@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/data/api/game_api.dart';
 import 'package:trivia_app/data/api_client.dart';
 import 'package:trivia_app/data/repositories/game_repository.dart';

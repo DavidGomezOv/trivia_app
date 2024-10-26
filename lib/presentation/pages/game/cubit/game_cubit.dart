@@ -13,8 +13,9 @@ part 'game_state.dart';
 
 part 'game_cubit.freezed.dart';
 
-enum GameStatus { initial, inProgress, finished, questionTimeOff }
+enum GameStatus { initial, correctAnswer, incorrectAnswer }
 
+//TODO Resolve issues with repeated questions
 class GameCubit extends Cubit<GameState> {
   GameCubit({required this.questionsRepository}) : super(const GameState());
 
@@ -57,6 +58,21 @@ class GameCubit extends Cubit<GameState> {
         emit(state.copyWith(pageStatus: PageStatus.failedToLoad, errorMessage: error.toString()));
       },
     );
+  }
+
+  void validateSelectedQuestion({required String selectedAnswer}) {
+    final currentQuestionCorrectAnswer =
+        state.questions[state.currentQuestion].correctAnswer.trim().toLowerCase();
+    GameState stateToEmit = state.copyWith(
+      gameStatus: selectedAnswer.trim().toLowerCase() == currentQuestionCorrectAnswer
+          ? GameStatus.correctAnswer
+          : GameStatus.incorrectAnswer,
+    );
+    emit(stateToEmit);
+  }
+
+  void resetGameStatus() {
+    emit(state.copyWith(gameStatus: GameStatus.initial));
   }
 
   void nextQuestion() {

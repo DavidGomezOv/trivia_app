@@ -34,7 +34,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                 ),
               ),
               CategoryUiModel(
-                title: 'Art',
+                title: 'Movies',
                 description: 'This is a small description of the selected category',
                 angle: 1.5,
                 color: Colors.yellow,
@@ -44,7 +44,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.color_lens_outlined, size: 60, color: Colors.white),
+                    child: Icon(Icons.movie_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -52,12 +52,12 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.color_lens_outlined, size: 80, color: Colors.white),
+                    child: Icon(Icons.movie_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
               CategoryUiModel(
-                title: 'Animals',
+                title: 'Science',
                 description: 'This is a small description of the selected category',
                 angle: 1,
                 color: Colors.green,
@@ -67,7 +67,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.pets, size: 60, color: Colors.white),
+                    child: Icon(Icons.science_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -75,7 +75,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   left: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.pets, size: 80, color: Colors.white),
+                    child: Icon(Icons.science_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),
@@ -124,7 +124,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                 ),
               ),
               CategoryUiModel(
-                title: 'Mythology',
+                title: 'Computers',
                 description: 'This is a small description of the selected category',
                 angle: -.5,
                 color: Colors.deepPurple,
@@ -134,7 +134,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (320 / 3) - 60,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_kabaddi_outlined, size: 60, color: Colors.white),
+                    child: Icon(Icons.laptop_mac_outlined, size: 60, color: Colors.white),
                   ),
                 ),
                 webIcon: const Positioned(
@@ -142,7 +142,7 @@ class CategoryCubit extends Cubit<CategoryState> {
                   right: (450 / 3) - 100,
                   child: MouseRegion(
                     opaque: false,
-                    child: Icon(Icons.sports_kabaddi_outlined, size: 80, color: Colors.white),
+                    child: Icon(Icons.laptop_mac_outlined, size: 80, color: Colors.white),
                   ),
                 ),
               ),

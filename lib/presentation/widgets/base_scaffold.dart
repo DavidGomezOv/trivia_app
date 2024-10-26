@@ -47,8 +47,11 @@ class BaseScaffold extends StatelessWidget {
                               style: ButtonStyles.primaryButton(context)
                                   .copyWith(padding: const WidgetStatePropertyAll(EdgeInsets.zero)),
                               onPressed: onBackPressed,
-                              child: const Icon(Icons.arrow_back_ios_new_rounded,
-                                  color: Colors.white, size: 40),
+                              child: const Icon(
+                                Icons.arrow_back_ios_new_rounded,
+                                color: Colors.white,
+                                size: 40,
+                              ),
                             ),
                           ),
                         if (header != null)
