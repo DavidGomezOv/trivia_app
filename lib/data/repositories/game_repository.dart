@@ -37,4 +37,10 @@ class GameRepository implements IGameRepository {
       return Result.failure(error: error);
     }
   }
+
+  @override
+  Future<Result<String>> getSessionToken() {
+    // TODO: implement getSessionToken
+    throw UnimplementedError();
+  }
 }

@@ -9,4 +9,6 @@ abstract class IGameRepository {
   Future<Result<QuestionsPerDifficulty>> getQuestionCountPerDifficulty({
     required String categoryId,
   });
+
+  Future<Result<String>> getSessionToken();
 }
