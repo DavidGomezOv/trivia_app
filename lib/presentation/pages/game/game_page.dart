@@ -28,10 +28,10 @@ class _GamePageState extends State<GamePage> {
   final OverlayPortalController overlayPortalController = OverlayPortalController();
   final GameTimerController gameTimerController = GameTimerController();
   final ConfettiController confettiController =
-      ConfettiController(duration: const Duration(seconds: 2));
+      ConfettiController(duration: const Duration(seconds: 1));
 
   int _getParticlesBasedOnResult(int correctAnswers, int totalQuestions) =>
-      (correctAnswers * 60) ~/ totalQuestions;
+      (correctAnswers * 2) ~/ totalQuestions;
 
   @override
   void dispose() {
@@ -68,8 +68,7 @@ class _GamePageState extends State<GamePage> {
           overlayPortalController.toggle();
           gameTimerController.pauseTimer();
           Timer(
-            //const Duration(seconds: 2),
-            const Duration(milliseconds: 300),
+            const Duration(seconds: 2),
             () {
               gameTimerController.resumeTimer();
               overlayPortalController.toggle();
@@ -188,35 +187,37 @@ class _GamePageState extends State<GamePage> {
                   maximumSize: const Size(40, 25),
                 ),
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: ConfettiWidget(
-                  confettiController: confettiController,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  gravity: .6,
-                  numberOfParticles:
-                      _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
-                  emissionFrequency: 1,
-                  minimumSize: const Size(30, 20),
-                  maximumSize: const Size(40, 25),
-                  particleDrag: .02,
+              if (context.isMobile()) ...[
+                Align(
+                  alignment: Alignment.topRight,
+                  child: ConfettiWidget(
+                    confettiController: confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    gravity: .6,
+                    numberOfParticles:
+                        _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
+                    emissionFrequency: 1,
+                    minimumSize: const Size(30, 20),
+                    maximumSize: const Size(40, 25),
+                    particleDrag: .02,
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: ConfettiWidget(
-                  confettiController: confettiController,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  gravity: .6,
-                  numberOfParticles:
-                      _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
-                  emissionFrequency: 1,
-                  minimumSize: const Size(30, 20),
-                  maximumSize: const Size(40, 25),
-                  blastDirection: 0,
-                  particleDrag: .02,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ConfettiWidget(
+                    confettiController: confettiController,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    gravity: .6,
+                    numberOfParticles:
+                        _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
+                    emissionFrequency: 1,
+                    minimumSize: const Size(30, 20),
+                    maximumSize: const Size(40, 25),
+                    blastDirection: 0,
+                    particleDrag: .02,
+                  ),
                 ),
-              ),
+              ],
             ],
           ],
         );
