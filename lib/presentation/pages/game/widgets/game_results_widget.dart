@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/routes/app_router.dart';
 import 'package:trivia_app/theme/button_styles.dart';
 import 'package:trivia_app/theme/custom_colors.dart';
@@ -33,10 +34,10 @@ class GameResultsWidget extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(20),
                   height: double.infinity,
                   child: FittedBox(
-                    fit: BoxFit.fitHeight,
+                    fit: context.isMobile() ? BoxFit.fitWidth : BoxFit.fitHeight,
                     child: TweenAnimationBuilder(
                       tween: Tween<double>(begin: 0, end: value),
                       duration: const Duration(milliseconds: 1500),
