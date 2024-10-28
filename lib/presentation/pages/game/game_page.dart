@@ -187,7 +187,7 @@ class _GamePageState extends State<GamePage> {
                   maximumSize: const Size(40, 25),
                 ),
               ),
-              if (context.isMobile()) ...[
+              if (!context.isMobile()) ...[
                 Align(
                   alignment: Alignment.topRight,
                   child: ConfettiWidget(

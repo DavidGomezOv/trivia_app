@@ -9,6 +9,5 @@ This is a simple Trivia - Quizz application based on BloC-Cubit architecture and
 ## Deployment
 
 - Build flutter web app:
-    - flutter build web --web-renderer html --release
-    - flutter build web --web-renderer html
-- Remove the " <base href="/"> " piece of code located in root>build>web>index.html
+    - flutter build web --web-renderer canvaskit
+- Remove the " base href="/" " piece of code located in root > build > web > index.html
