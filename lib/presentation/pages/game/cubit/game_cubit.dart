@@ -13,9 +13,8 @@ part 'game_state.dart';
 
 part 'game_cubit.freezed.dart';
 
-enum GameStatus { initial, correctAnswer, incorrectAnswer }
+enum GameStatus { initial, correctAnswer, incorrectAnswer, gameEnded }
 
-//TODO Resolve issues with repeated questions
 class GameCubit extends Cubit<GameState> {
   GameCubit({required this.questionsRepository}) : super(const GameState());
 
@@ -63,10 +62,11 @@ class GameCubit extends Cubit<GameState> {
   void validateSelectedQuestion({required String selectedAnswer}) {
     final currentQuestionCorrectAnswer =
         state.questions[state.currentQuestion].correctAnswer.trim().toLowerCase();
+    final bool isCorrectAnswer =
+        selectedAnswer.trim().toLowerCase() == currentQuestionCorrectAnswer;
     GameState stateToEmit = state.copyWith(
-      gameStatus: selectedAnswer.trim().toLowerCase() == currentQuestionCorrectAnswer
-          ? GameStatus.correctAnswer
-          : GameStatus.incorrectAnswer,
+      gameStatus: isCorrectAnswer ? GameStatus.correctAnswer : GameStatus.incorrectAnswer,
+      correctAnswers: isCorrectAnswer ? state.correctAnswers + 1 : state.correctAnswers,
     );
     emit(stateToEmit);
   }
@@ -78,6 +78,8 @@ class GameCubit extends Cubit<GameState> {
   void nextQuestion() {
     if (state.currentQuestion + 1 < state.questions.length) {
       emit(state.copyWith(currentQuestion: state.currentQuestion + 1));
+    } else {
+      emit(state.copyWith(gameStatus: GameStatus.gameEnded));
     }
   }
 

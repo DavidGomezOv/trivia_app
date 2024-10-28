@@ -7,7 +7,10 @@ import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/presentation/pages/game/widgets/answers_list_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/game_header_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/game_results_widget.dart';
 import 'package:trivia_app/presentation/pages/game/widgets/game_timer_widget.dart';
+import 'package:trivia_app/presentation/pages/game/widgets/selected_question_result_widget.dart';
 import 'package:trivia_app/presentation/pages/game/widgets/time_left_indicator_widget.dart';
 import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
 import 'package:trivia_app/presentation/widgets/error_state_widget.dart';
@@ -60,42 +63,25 @@ class GamePage extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        final isGameEnded = state.gameStatus == GameStatus.gameEnded;
         return BaseScaffold(
           width: context.isMobile() ? null : MediaQuery.sizeOf(context).width * 0.8,
-          header: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  category,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displaySmall!
-                      .copyWith(color: CustomColors.greenText),
-                ),
-              ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GameTimerWidget(controller: gameTimerController),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Text(
-                      '${state.currentQuestion + 1} / ${state.questions.length}',
-                      style: Theme.of(context).textTheme.titleSmall!,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          header: GameHeaderWidget(
+            title: isGameEnded ? 'Results' : category,
+            gameTimerController: isGameEnded ? null : gameTimerController,
+            questionsIndicator:
+                isGameEnded ? null : '${state.currentQuestion + 1} / ${state.questions.length}',
           ),
           child: Builder(
             builder: (context) {
               if (state.pageStatus == PageStatus.failedToLoad) {
                 return ErrorStateWidget(errorMessage: state.errorMessage);
+              }
+              if (isGameEnded) {
+                return GameResultsWidget(
+                  correctAnswers: state.correctAnswers,
+                  totalQuestions: state.questions.length,
+                );
               }
               if (state.pageStatus == PageStatus.loaded &&
                   state.questions.isNotEmpty &&
@@ -103,26 +89,9 @@ class GamePage extends StatelessWidget {
                 final currentQuestionData = state.questions[state.currentQuestion];
                 return OverlayPortal(
                   controller: overlayPortalController,
-                  overlayChildBuilder: (BuildContext context) {
-                    return Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        width: double.infinity,
-                        height: 200,
-                        color: state.gameStatus == GameStatus.correctAnswer
-                            ? Colors.green
-                            : Colors.red,
-                        alignment: Alignment.center,
-                        child: Text(
-                          state.gameStatus == GameStatus.correctAnswer
-                              ? 'Correct!'
-                              : 'Oops, incorrect!',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                      ),
-                    );
-                  },
+                  overlayChildBuilder: (BuildContext context) => SelectedQuestionResultWidget(
+                    isCorrect: state.gameStatus == GameStatus.correctAnswer,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

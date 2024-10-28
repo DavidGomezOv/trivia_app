@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/game/cubit/game_cubit.dart';
 import 'package:trivia_app/theme/button_styles.dart';
-import 'package:trivia_app/theme/custom_colors.dart';
 
 class AnswersListWidget extends StatelessWidget {
   const AnswersListWidget({

@@ -7,6 +7,7 @@ class GameState with _$GameState {
     @Default(0) int currentQuestion,
     @Default(PageStatus.initial) PageStatus pageStatus,
     @Default(GameStatus.initial) GameStatus gameStatus,
+    @Default(0) int correctAnswers,
     DifficultyUiModel? selectedDifficulty,
     String? errorMessage,
   }) = _GameState;
