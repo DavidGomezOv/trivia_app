@@ -27,6 +27,11 @@ class GameRepository implements IGameRepository {
         apiCall: questionsApi.getQuestionCountPerDifficulty(categoryId: categoryId),
       );
 
+  @override
+  Future<Result<String>> getSessionToken() => _captureErrorsOnApiCall<String>(
+        apiCall: questionsApi.getSessionToken(),
+      );
+
   Future<Result<T>> _captureErrorsOnApiCall<T>({required Future<T> apiCall}) async {
     try {
       final result = await apiCall;
@@ -36,11 +41,5 @@ class GameRepository implements IGameRepository {
     } on Exception catch (error) {
       return Result.failure(error: error);
     }
-  }
-
-  @override
-  Future<Result<String>> getSessionToken() {
-    // TODO: implement getSessionToken
-    throw UnimplementedError();
   }
 }

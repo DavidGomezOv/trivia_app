@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:trivia_app/domain/models/category_ui_model.dart';
+import 'package:trivia_app/domain/models/ui_models/category_ui_model.dart';
 
 part 'category_state.dart';
 

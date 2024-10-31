@@ -10,6 +10,7 @@ class GameConfig with _$GameConfig {
     required String amount,
     required String category,
     required String difficulty,
+    @Default('') String token,
     @Default('multiple') String type,
     @Default('base64') String encode,
   }) = _GameConfig;

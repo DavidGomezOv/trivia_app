@@ -30,8 +30,19 @@ class _GamePageState extends State<GamePage> {
   final ConfettiController confettiController =
       ConfettiController(duration: const Duration(seconds: 1));
 
-  int _getParticlesBasedOnResult(int correctAnswers, int totalQuestions) =>
-      (correctAnswers * 2) ~/ totalQuestions;
+  int _getParticlesBasedOnResult(int correctAnswers, int totalQuestions) {
+    final particlesByPercentage = {
+      4: 2,
+      5: 3,
+      6: 4,
+      7: 5,
+      8: 6,
+      9: 7,
+      10: 8,
+    };
+    final percentage = (correctAnswers * 10) ~/ totalQuestions;
+    return particlesByPercentage[percentage] ?? 0;
+  }
 
   @override
   void dispose() {
@@ -68,7 +79,8 @@ class _GamePageState extends State<GamePage> {
           overlayPortalController.toggle();
           gameTimerController.pauseTimer();
           Timer(
-            const Duration(seconds: 2),
+            //const Duration(seconds: 2),
+            const Duration(milliseconds: 200),
             () {
               gameTimerController.resumeTimer();
               overlayPortalController.toggle();
@@ -173,7 +185,8 @@ class _GamePageState extends State<GamePage> {
                 },
               ),
             ),
-            if (isGameEnded) ...[
+            if (isGameEnded &&
+                _getParticlesBasedOnResult(state.correctAnswers, state.questions.length) > 0) ...[
               Align(
                 alignment: Alignment.topCenter,
                 child: ConfettiWidget(
@@ -182,7 +195,7 @@ class _GamePageState extends State<GamePage> {
                   gravity: .6,
                   numberOfParticles:
                       _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
-                  emissionFrequency: 1,
+                  emissionFrequency: .2,
                   minimumSize: const Size(30, 20),
                   maximumSize: const Size(40, 25),
                 ),
@@ -196,7 +209,7 @@ class _GamePageState extends State<GamePage> {
                     gravity: .6,
                     numberOfParticles:
                         _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
-                    emissionFrequency: 1,
+                    emissionFrequency: .2,
                     minimumSize: const Size(30, 20),
                     maximumSize: const Size(40, 25),
                     particleDrag: .02,
@@ -210,7 +223,7 @@ class _GamePageState extends State<GamePage> {
                     gravity: .6,
                     numberOfParticles:
                         _getParticlesBasedOnResult(state.correctAnswers, state.questions.length),
-                    emissionFrequency: 1,
+                    emissionFrequency: .2,
                     minimumSize: const Size(30, 20),
                     maximumSize: const Size(40, 25),
                     blastDirection: 0,

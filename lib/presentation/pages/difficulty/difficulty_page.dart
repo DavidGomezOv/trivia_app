@@ -87,6 +87,7 @@ class DifficultyPage extends StatelessWidget {
                                 ..updateSelectedDifficulty(
                                   difficultyUiModel: state.selectedDifficulty!,
                                 )
+                                ..getSessionToken()
                                 ..getQuestions(gameConfig: gameConfig);
                               context.goNamed(
                                 AppRouter.gameRouteData.name,

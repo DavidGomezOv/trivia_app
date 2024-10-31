@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trivia_app/domain/models/category_ui_model.dart';
+import 'package:trivia_app/domain/models/ui_models/category_ui_model.dart';
 import 'package:trivia_app/core/extensions.dart';
 import 'package:trivia_app/presentation/pages/category/cubit/category_cubit.dart';
 

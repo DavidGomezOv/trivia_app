@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/domain/irepositories/i_game_repository.dart';
-import 'package:trivia_app/domain/models/difficulty_ui_model.dart';
 import 'package:trivia_app/domain/models/game_config.dart';
 import 'package:trivia_app/domain/models/question.dart';
+import 'package:trivia_app/domain/models/ui_models/difficulty_ui_model.dart';
 
 part 'game_state.dart';
 
@@ -21,13 +21,32 @@ class GameCubit extends Cubit<GameState> {
   final IGameRepository questionsRepository;
 
   void resetGame() {
-    emit(const GameState());
+    emit(GameState(sessionToken: state.sessionToken));
+  }
+
+  Future<void> getSessionToken() async {
+    if (state.sessionToken.isNotEmpty) return;
+
+    emit(state.copyWith(pageStatus: PageStatus.loading));
+
+    final result = await questionsRepository.getSessionToken();
+
+    result.when(
+      success: (data) {
+        emit(state.copyWith(pageStatus: PageStatus.loaded, sessionToken: data));
+      },
+      failure: (error) {
+        emit(state.copyWith(pageStatus: PageStatus.failedToLoad, errorMessage: error.toString()));
+      },
+    );
   }
 
   Future<void> getQuestions({required GameConfig gameConfig}) async {
     emit(state.copyWith(pageStatus: PageStatus.loading));
 
-    final result = await questionsRepository.getQuestions(gameConfig: gameConfig);
+    final result = await questionsRepository.getQuestions(
+      gameConfig: gameConfig.copyWith(token: state.sessionToken),
+    );
 
     result.when(
       success: (data) {

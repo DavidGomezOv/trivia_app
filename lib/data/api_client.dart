@@ -14,8 +14,7 @@ class ApiClient implements BaseApiClient {
     required BaseJsonParser<T> jsonParser,
   }) async {
     try {
-      final response =
-          await http.get(path).timeout(const Duration(seconds: 30));
+      final response = await http.get(path).timeout(const Duration(seconds: 30));
 
       switch (response.statusCode) {
         case 200:

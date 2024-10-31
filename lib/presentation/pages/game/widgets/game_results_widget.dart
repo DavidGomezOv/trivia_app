@@ -59,7 +59,7 @@ class GameResultsWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Your final score is',
+                      'Final Score',
                       style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                             color: CustomColors.greenText,
                           ),

@@ -8,6 +8,7 @@ class GameState with _$GameState {
     @Default(PageStatus.initial) PageStatus pageStatus,
     @Default(GameStatus.initial) GameStatus gameStatus,
     @Default(0) int correctAnswers,
+    @Default('') String sessionToken,
     DifficultyUiModel? selectedDifficulty,
     String? errorMessage,
   }) = _GameState;

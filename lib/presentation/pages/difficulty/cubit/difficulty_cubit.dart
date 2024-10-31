@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:trivia_app/core/enums.dart';
 import 'package:trivia_app/domain/irepositories/i_game_repository.dart';
-import 'package:trivia_app/domain/models/difficulty_ui_model.dart';
 import 'package:collection/collection.dart';
+import 'package:trivia_app/domain/models/ui_models/difficulty_ui_model.dart';
 
 part 'difficulty_state.dart';
 
