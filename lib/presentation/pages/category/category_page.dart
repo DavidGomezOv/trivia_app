@@ -30,12 +30,11 @@ class CategoryPage extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      ...List.generate(
-                        6,
-                        (index) => CategoryButton(
-                          category: state.categories[index],
-                          isHovered: state.categories[index] == state.hoveredCategory,
-                          isSelected: state.categories[index] == state.selectedCategory,
+                      ...state.categories.map(
+                        (element) => CategoryButton(
+                          category: element,
+                          isHovered: element == state.hoveredCategory,
+                          isSelected: element == state.selectedCategory,
                         ),
                       ),
                     ],

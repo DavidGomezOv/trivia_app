@@ -79,6 +79,7 @@ class _GamePageState extends State<GamePage> {
           overlayPortalController.toggle();
           gameTimerController.pauseTimer();
           Timer(
+            //TODO REMOVE THIS
             //const Duration(seconds: 2),
             const Duration(milliseconds: 200),
             () {
