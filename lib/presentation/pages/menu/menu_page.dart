@@ -1,7 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trivia_app/presentation/pages/menu/widgets/header_icons_widget.dart';
+import 'package:trivia_app/presentation/pages/menu/widgets/title_widget.dart';
 import 'package:trivia_app/presentation/widgets/app_background_widget.dart';
 import 'package:trivia_app/routes/app_router.dart';
 import 'package:trivia_app/theme/button_styles.dart';
@@ -18,82 +18,57 @@ class MenuPage extends StatelessWidget {
         child: Stack(
           children: [
             CustomPaint(
-              size: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+              size: Size(
+                MediaQuery.of(context).size.width,
+                MediaQuery.of(context).size.height,
+              ),
               painter: _MenuWavesBackground(fillColor: CustomColors.surfaceSecondary),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height / 2.5,
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            Transform.rotate(
-                              angle: -pi / 4,
-                              origin: const Offset(-1, 50),
-                              child: Icon(
-                                Icons.question_mark_sharp,
-                                size: 120,
-                                color: CustomColors.greenText.withOpacity(.3),
-                              ),
-                            ),
-                            Icon(
-                              Icons.question_mark_sharp,
-                              size: 120,
-                              color: CustomColors.greenText.withOpacity(.6),
-                            ),
-                            Transform.rotate(
-                              angle: pi / 4,
-                              origin: const Offset(-1, 50),
-                              child: Icon(
-                                Icons.question_mark_sharp,
-                                size: 120,
-                                color: CustomColors.greenText,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 30),
-                        Text(
-                          'TRIVIAPP',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(color: CustomColors.greenText),
-                        ),
-                      ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: MediaQuery.sizeOf(context).height / 2.5,
+                    child: const Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          HeaderIconsWidget(),
+                          SizedBox(height: 30),
+                          TitleWidget(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const Spacer(),
-                Text(
-                  'Let\'s Play!',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Test your knowledge',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const Spacer(),
-                ElevatedButton(
-                  style: ButtonStyles.primaryButton(context),
-                  onPressed: () => context.goNamed(AppRouter.categoryRouteData.name),
-                  child: Text(
-                    'Play Now',
-                    style: Theme.of(context).textTheme.headlineSmall,
+                  const Spacer(),
+                  Text(
+                    'Let\'s Play!',
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
-                ),
-                const Spacer(),
-              ],
+                  const SizedBox(height: 10),
+                  Text(
+                    'Test your knowledge and have fun',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    style: ButtonStyles.primaryButton(context),
+                    onPressed: () => context.goNamed(AppRouter.categoryRouteData.name),
+                    child: Text(
+                      'Play Now',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
             ),
           ],
         ),

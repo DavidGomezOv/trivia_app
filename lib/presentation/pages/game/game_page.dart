@@ -17,6 +17,7 @@ import 'package:trivia_app/presentation/widgets/base_scaffold.dart';
 import 'package:trivia_app/presentation/widgets/error_state_widget.dart';
 import 'package:trivia_app/theme/custom_colors.dart';
 
+//TODO Implement timer in results page and animations as well
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
 
@@ -79,9 +80,7 @@ class _GamePageState extends State<GamePage> {
           overlayPortalController.toggle();
           gameTimerController.pauseTimer();
           Timer(
-            //TODO REMOVE THIS
-            //const Duration(seconds: 2),
-            const Duration(milliseconds: 200),
+            const Duration(seconds: 2),
             () {
               gameTimerController.resumeTimer();
               overlayPortalController.toggle();
