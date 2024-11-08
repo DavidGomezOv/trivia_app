@@ -1,5 +1,7 @@
 # trivia_app
 
+- Check the Deployed version in this link: https://triviapp.lat/menu
+
 This is a simple Trivia - Quizz application based on BloC-Cubit architecture and using the Open Trivia Database: "https://opentdb.com"
 
 ## Getting Started
